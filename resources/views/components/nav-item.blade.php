@@ -1,3 +1,5 @@
-<div>
-    <!-- People find pleasure in different ways. I find it in keeping my mind clear. - Marcus Aurelius -->
-</div>
+<li class="nav-link">
+    <a class="nav-link {{ $active }}" href="{{ $href }}">
+        {{ $slot }}
+    </a>
+</li>
