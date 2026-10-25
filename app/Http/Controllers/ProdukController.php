@@ -21,7 +21,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        return view('produk.create');
     }
 
     /**
@@ -29,7 +29,18 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'kode_produk' => 'required|string|max:255|unique:produks',
+            'nama_produk' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+            'merek' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        Produk::create($validated);
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
