@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProdukController extends Controller
 {
@@ -56,7 +57,7 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        return view('produk.edit', compact('produk'));
     }
 
     /**
@@ -64,7 +65,18 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        $validated = $request->validate([
+            'kode_produk' => ['required','string','max:255', Rule::unique('produks')->ignore($produk->id)],
+            'nama_produk' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+            'merek' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        $produk->update($validated);
+        return redirect()->route('produk.index')->with('success','{Produk berhasil diperbarui.');
     }
 
     /**
