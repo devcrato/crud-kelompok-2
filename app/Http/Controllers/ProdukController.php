@@ -76,7 +76,7 @@ class ProdukController extends Controller
         ]);
 
         $produk->update($validated);
-        return redirect()->route('produk.index')->with('success','{Produk berhasil diperbarui.');
+        return redirect()->route('produk.index')->with('success','Produk berhasil diperbarui.');
     }
 
     /**
