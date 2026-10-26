@@ -27,7 +27,7 @@
             <tbody>
                 @forelse ($produks as $produk)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $produks->firstItem() + $loop->index }}</td>
                     <td>{{ $produk->kode_produk }}</td>
                     <td>{{ $produk->nama_produk }}</td>
                     <td>{{ $produk->kategori }}</td>
